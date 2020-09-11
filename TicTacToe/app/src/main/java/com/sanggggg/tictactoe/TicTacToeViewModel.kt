@@ -20,6 +20,8 @@ class TicTacToeViewModel : ViewModel() {
     val cells = ArrayList<MutableLiveData<String>>()
     val gameStatus = MutableLiveData<String>()
     private var whoseTurn = true
+    private var done = false
+    private var turn = 0
 
     init {
         for (i in 0..8) {
@@ -29,11 +31,48 @@ class TicTacToeViewModel : ViewModel() {
     }
 
     // recommended function structures (fill free to fix it)
-    fun clickCell(pos: Int) {}
+    fun clickCell(pos: Int) {
+        if (done) return
+        if (cells[pos].value == PLAYER_X || cells[pos].value == PLAYER_O) {
+            return
+        }
+        if (whoseTurn) {
+            cells[pos].value = PLAYER_O
+        } else {
+            cells[pos].value = PLAYER_X
+        }
+        turn++
+        checkWinOrNot()
+        whoseTurn = !whoseTurn
 
-    fun restart() {}
+    }
+
+    fun restart() {
+        gameStatus.value = STATUS_PLAYING
+        for (i in 0..8) {
+            cells[i].value = ""
+        }
+        done = false
+    }
 
     fun checkWinOrNot() {
+        for (i in 0..2) {
+            if ((cells[i].value != "" &&
+                        cells[i].value == cells[i + 3].value &&
+                        cells[i + 3].value == cells[i + 6].value) ||
+                (cells[i*3].value != "" &&
+                        cells[i * 3].value == cells[i * 3 + 1].value &&
+                        cells[i * 3 + 1].value == cells[i * 3 + 2].value)
+            ) {
+                if (whoseTurn) {
+                    gameStatus.value = STATUS_O_WIN
+                } else {
+                    gameStatus.value = STATUS_X_WIN
+                }
+                done = true
+                return
+            }
 
+        }
     }
 }
