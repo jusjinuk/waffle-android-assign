@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
             bindingDialog.textContent.setText("")
             dialog.show()
         }
+
+        todoViewModel.allTodosLiveData.observe(this, Observer {
+            todoViewModel.alltodos = it
+        })
     }
 
     private fun setUpDialog() {

@@ -1,6 +1,8 @@
 package com.sanggggg.simpletodo.utils
 
+import android.util.Log
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.sanggggg.simpletodo.room.Todo
 import com.sanggggg.simpletodo.ui.TodoListAdapter
@@ -11,3 +13,11 @@ fun bindAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
 }
 
 // TODO: Bind LiveData<List<Todo>> by BindingAdapter
+@BindingAdapter("items")
+fun bindItems(view: RecyclerView, items: LiveData<List<Todo>>?){
+//    Log.i("BindingUtils", items?.value.toString())
+    val adapt = view.adapter as TodoListAdapter
+    if(items?.value != null){
+        adapt.data = items.value!!
+    }
+}
