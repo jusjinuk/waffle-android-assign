@@ -15,7 +15,6 @@ class TodoViewModel(private val repository: TodoRepository) : ViewModel() {
     //        : val allTodos ...
 
     val allTodosLiveData = repository.getAllTodos()
-    var alltodos = allTodosLiveData.value
 
     fun addTodo(title: String, content: String) {
         val newitem = Todo(title, content)
