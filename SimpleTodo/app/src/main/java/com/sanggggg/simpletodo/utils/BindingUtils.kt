@@ -17,6 +17,6 @@ fun bindItems(view: RecyclerView, items: List<Todo>?){
 //    Log.i("BindingUtils", items?.value.toString())
     val adapt = view.adapter as TodoListAdapter
     if(items != null){
-        adapt.data = items
+        adapt.submitList( items)
     }
 }
