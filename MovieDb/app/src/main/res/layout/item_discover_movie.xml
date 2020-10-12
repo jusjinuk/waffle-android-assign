@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="item"
+            type="com.example.moviedb.api.Movie" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -24,7 +27,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:setImageUrl=""
+                app:setImageUrl="@{item.poster_path}"
                 tools:srcCompat="@tools:sample/avatars"
                 android:contentDescription="" />
 
@@ -32,7 +35,7 @@
                 android:id="@+id/movie_title_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="@{item.title}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
