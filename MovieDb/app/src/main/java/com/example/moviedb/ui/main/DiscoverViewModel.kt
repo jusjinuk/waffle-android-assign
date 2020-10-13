@@ -7,7 +7,11 @@ import com.example.moviedb.repository.MovieRepository
 
 class DiscoverViewModel(private val repository: MovieRepository) : ViewModel() {
     fun discoverMovies(page : Long, adapter: MovieListAdapter) {
-        repository.discoverMovies(page, adapter)
-        Log.i("DiscoverViewModel", "Hello")
+        repository.discoverMovies(page)
+            ?.doOnSuccess{
+                adapter.submitList(it.results)
+            }?.doOnError{
+                Log.i("DiscoverViewModel",it.toString())
+            }?.subscribe()
     }
 }
