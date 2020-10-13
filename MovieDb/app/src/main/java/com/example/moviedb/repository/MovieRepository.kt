@@ -8,15 +8,15 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MovieRepository(private val service: MovieService) {
-    fun discoverMovies(page: Long, adapter: MovieListAdapter) {
+    fun discoverMovies(page: Long,adapter: MovieListAdapter) {
         service.fetchDiscoverMovie(page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess {
                 adapter.submitList(it.results)
-                Log.i("MovieRepository", it.results[0].title)
+                Log.i("MovieRepository", "Hello " + it.results[0].title)
             }.doOnError{
                 Log.i("MovieRepository", "Error")
-            }
+            }.subscribe()
     }
 }

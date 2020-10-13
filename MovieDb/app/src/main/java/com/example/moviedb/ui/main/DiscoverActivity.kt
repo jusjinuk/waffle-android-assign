@@ -24,7 +24,7 @@ class DiscoverActivity : AppCompatActivity() {
             lifecycleOwner = this@DiscoverActivity
             discoverMovieList.adapter = MovieListAdapter()
             val adapt = discoverMovieList.adapter as MovieListAdapter
-            discoverViewModel.discoverMovies(1,adapt)
+            discoverViewModel.discoverMovies(1, adapt)
         }
 
     }
