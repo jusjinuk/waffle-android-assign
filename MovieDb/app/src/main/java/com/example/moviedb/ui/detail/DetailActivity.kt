@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.moviedb.R
+import com.example.moviedb.api.Movie
 import com.example.moviedb.databinding.ActivityDetailBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -16,5 +17,12 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
+        val item = intent.getParcelableExtra<Movie>("item")
+//        item?.let {Log.i("DetailActivity","Poster path" + it.poster_path)}
+        binding.run {
+            movie = item
+            lifecycleOwner=this@DetailActivity
+        }
+
     }
 }

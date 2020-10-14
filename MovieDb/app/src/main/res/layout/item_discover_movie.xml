@@ -8,12 +8,16 @@
         <variable
             name="item"
             type="com.example.moviedb.api.Movie" />
+        <variable
+            name="clickListener"
+            type="com.example.moviedb.ui.main.MovieClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_margin="6dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{()->clickListener.onClick(item)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:setImageUrl="@{item.poster_path}"
                 tools:srcCompat="@tools:sample/avatars"
-                android:contentDescription="" />
+                android:contentDescription="Poster Image" />
 
             <TextView
                 android:id="@+id/movie_title_txt"

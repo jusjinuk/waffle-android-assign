@@ -1,5 +1,6 @@
 package com.example.moviedb.ui.main
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedb.api.Movie
 import com.example.moviedb.databinding.ItemDiscoverMovieBinding
+import com.example.moviedb.ui.detail.DetailActivity
 
 class MovieListAdapter : ListAdapter<Movie, MovieViewHolder>(MovieDiffCallback()) {
 
@@ -38,7 +40,16 @@ class MovieViewHolder(private val binding: ItemDiscoverMovieBinding) :
     fun bindItems(movie:Movie){
         binding.run {
             item = movie
+            clickListener = MovieClickListener {
+                val toDetailIntent: Intent = Intent(binding.root.context, DetailActivity::class.java)
+                toDetailIntent.putExtra("item", it)
+                binding.root.context.startActivity(toDetailIntent)
+            }
             executePendingBindings()
         }
     }
+}
+
+class MovieClickListener(val clickListener: (item : Movie) -> Unit){
+    fun onClick(item: Movie) = clickListener(item)
 }
