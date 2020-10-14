@@ -23,7 +23,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/item_discover_movie"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:items = "@{viewModel.listMovies}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

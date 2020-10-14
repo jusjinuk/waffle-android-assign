@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedb.api.Movie
@@ -52,4 +53,13 @@ class MovieViewHolder(private val binding: ItemDiscoverMovieBinding) :
 
 class MovieClickListener(val clickListener: (item : Movie) -> Unit){
     fun onClick(item: Movie) = clickListener(item)
+}
+
+class InfiniteScrollListener(val layoutManager: GridLayoutManager, val func: () -> Unit):
+    RecyclerView.OnScrollListener(){
+    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        super.onScrolled(recyclerView, dx, dy)
+        if(!recyclerView.canScrollVertically(1))
+            func()
+    }
 }

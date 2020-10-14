@@ -1,6 +1,7 @@
 package com.example.moviedb.ui.main
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -27,7 +28,14 @@ class DiscoverActivity : AppCompatActivity() {
             lifecycleOwner = this@DiscoverActivity
             discoverMovieList.adapter = movieListAdapter
             discoverMovieList.layoutManager = myLayoutManager
+            discoverMovieList.clearOnScrollListeners()
+            discoverMovieList.addOnScrollListener(InfiniteScrollListener(myLayoutManager){
+                discoverViewModel.page += 1
+                discoverViewModel.discoverMovies(discoverViewModel.page)
+            })
         }
-        discoverViewModel.discoverMovies(1, movieListAdapter)
+        if(discoverViewModel.listMovies.value == null)
+            discoverViewModel.discoverMovies(discoverViewModel.page)
+
     }
 }

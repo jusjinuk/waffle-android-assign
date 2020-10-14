@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 data class DiscoverResponse (
     val page: Long,
     val total_results: Long,
-    val results: List<Movie>
+    val results: MutableList<Movie>
 )
 
 @Parcelize
