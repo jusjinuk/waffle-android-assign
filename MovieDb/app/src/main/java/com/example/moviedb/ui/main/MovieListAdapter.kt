@@ -57,9 +57,29 @@ class MovieClickListener(val clickListener: (item : Movie) -> Unit){
 
 class InfiniteScrollListener(val layoutManager: GridLayoutManager, val func: () -> Unit):
     RecyclerView.OnScrollListener(){
+    private var previousTotal = 0
+    private var loading = true
+
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
-        if(!recyclerView.canScrollVertically(1))
-            func()
+
+        if (dy > 0) {
+            val visibleItemCount = recyclerView.childCount
+            val totalItemCount = layoutManager.itemCount
+            val firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
+
+
+            if (loading) {
+                if (totalItemCount > previousTotal) {
+                    loading = false
+                    previousTotal = totalItemCount
+                }
+            }
+            if (!loading && (totalItemCount - visibleItemCount)
+                <= firstVisibleItem + 2 ) {
+                func()
+                loading = true
+            }
+        }
     }
 }

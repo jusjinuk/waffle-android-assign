@@ -17,8 +17,11 @@ class DiscoverViewModel(private val repository: MovieRepository) : ViewModel() {
             ?.doOnSuccess{
                 if(listMovies.value == null)
                     listMovies.value = it.results
-                else
-                    listMovies.value!!.plusAssign(it.results)
+                else{
+                    val tmplist = listMovies.value!!.toMutableList()
+                    tmplist.addAll(it.results)
+                    listMovies.value = tmplist
+                }
             }?.doOnError{
                 Log.i("DiscoverViewModel",it.toString())
             }?.subscribe()

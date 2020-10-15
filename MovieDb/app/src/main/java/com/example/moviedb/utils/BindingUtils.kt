@@ -1,5 +1,6 @@
 package com.example.moviedb.utils
 
+import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
