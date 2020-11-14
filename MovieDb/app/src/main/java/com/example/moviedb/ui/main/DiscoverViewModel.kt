@@ -6,15 +6,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moviedb.api.Movie
 import com.example.moviedb.repository.MovieRepository
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 class DiscoverViewModel(private val repository: MovieRepository) : ViewModel() {
 
-    var listMovies = MutableLiveData<MutableList<Movie>>()
-    var page: Long = 1
+    val listMovies = MutableLiveData<MutableList<Movie>>()
+    val errorMessge = MutableLiveData<String>()
+    private var page: Long = 1
 
-    fun discoverMovies(page : Long) {
+    private fun discoverMovies(page : Long) {
         repository.discoverMovies(page)
-            ?.doOnSuccess{
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe({it ->
                 if(listMovies.value == null)
                     listMovies.value = it.results
                 else{
@@ -22,8 +25,13 @@ class DiscoverViewModel(private val repository: MovieRepository) : ViewModel() {
                     tmplist.addAll(it.results)
                     listMovies.value = tmplist
                 }
-            }?.doOnError{
-                Log.i("DiscoverViewModel",it.toString())
-            }?.subscribe()
+            }, {it ->
+                it.message?.let { m -> errorMessge.value = m }
+            })
+    }
+
+    fun incrPage() {
+        discoverMovies(page)
+        page++
     }
 }

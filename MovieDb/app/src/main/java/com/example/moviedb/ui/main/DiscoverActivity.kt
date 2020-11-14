@@ -3,8 +3,10 @@ package com.example.moviedb.ui.main
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviedb.R
 import com.example.moviedb.databinding.ActivityDiscoveryBinding
@@ -30,12 +32,15 @@ class DiscoverActivity : AppCompatActivity() {
             discoverMovieList.layoutManager = myLayoutManager
             discoverMovieList.clearOnScrollListeners()
             discoverMovieList.addOnScrollListener(InfiniteScrollListener(myLayoutManager){
-                discoverViewModel.page += 1
-                discoverViewModel.discoverMovies(discoverViewModel.page)
+                discoverViewModel.incrPage()
             })
         }
-        if(discoverViewModel.listMovies.value == null)
-            discoverViewModel.discoverMovies(discoverViewModel.page)
+
+        discoverViewModel.errorMessge.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+
+        discoverViewModel.incrPage()
 
     }
 }

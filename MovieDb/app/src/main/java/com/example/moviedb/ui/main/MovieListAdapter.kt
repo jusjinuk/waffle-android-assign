@@ -42,9 +42,7 @@ class MovieViewHolder(private val binding: ItemDiscoverMovieBinding) :
         binding.run {
             item = movie
             clickListener = MovieClickListener {
-                val toDetailIntent: Intent = Intent(binding.root.context, DetailActivity::class.java)
-                toDetailIntent.putExtra("item", it)
-                binding.root.context.startActivity(toDetailIntent)
+                binding.root.context.startActivity(DetailActivity.intentWithMovie(binding.root.context, it))
             }
             executePendingBindings()
         }

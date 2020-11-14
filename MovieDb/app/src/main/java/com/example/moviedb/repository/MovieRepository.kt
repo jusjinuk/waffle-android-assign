@@ -14,12 +14,5 @@ class MovieRepository(private val service: MovieService) {
     fun discoverMovies(page: Long): @NonNull Single<DiscoverResponse>? {
     return  service.fetchDiscoverMovie(page)
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-//            .doOnSuccess {
-//                adapter.submitList(it.results)
-//                Log.i("MovieRepository", "Hello " + it.results[0].title)
-//            }.doOnError{
-//                Log.i("MovieRepository", "Error")
-//            }.subscribe()
     }
 }
