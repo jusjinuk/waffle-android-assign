@@ -1,0 +1,12 @@
+package com.android.example.seminarmanager.ui.user
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.android.example.seminarmanager.R
+
+class SignupActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_signup)
+    }
+}
