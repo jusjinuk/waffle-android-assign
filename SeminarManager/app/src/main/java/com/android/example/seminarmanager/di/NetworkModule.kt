@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.android.example.seminarmanager.BuildConfig
 import com.android.example.seminarmanager.di.NetworkConst.BASE_URL
 import com.android.example.seminarmanager.di.NetworkConst.PREFS_FILENAME
+import com.android.example.seminarmanager.di.NetworkConst.TOKEN_KEY
 import com.android.example.seminarmanager.network.service.UserService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -18,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkConst {
     const val BASE_URL = "http://ec2-3-34-178-249.ap-northeast-2.compute.amazonaws.com/"
     const val PREFS_FILENAME = "prefs"
-
+    const val TOKEN_KEY = "token"
 }
 
 val networkModule = module {
@@ -55,7 +56,6 @@ private fun provideOkHttpClient(prefs: SharedPreferences): OkHttpClient {
     }
 
     val authInterceptor = object : Interceptor {
-        val TOKEN_KEY = "token"
         val AUTHORIZATION = "Authorization"
         override fun intercept(chain: Interceptor.Chain): Response {
             val token = prefs.getString(TOKEN_KEY, null)
