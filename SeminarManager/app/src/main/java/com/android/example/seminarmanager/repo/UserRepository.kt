@@ -5,14 +5,10 @@ import com.android.example.seminarmanager.network.dto.PostUserDto
 import com.android.example.seminarmanager.network.dto.PutUserDto
 import com.android.example.seminarmanager.network.dto.UserDto
 import com.android.example.seminarmanager.network.service.UserService
-import com.android.example.seminarmanager.repo.Role.INSTRUCTOR
-import com.android.example.seminarmanager.repo.Role.IS_PARTICIPANT
-import com.android.example.seminarmanager.repo.Role.PARTICIPANT
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 object Role {
-    const val IS_PARTICIPANT = true
     const val PARTICIPANT = "participant"
     const val INSTRUCTOR = "instructor"
 }
@@ -30,7 +26,7 @@ class UserRepository(private val service: UserService) {
         password: String,
         first_name: String,
         last_name: String,
-        role: Boolean,
+        role: String,
         university: String,
         accepted: Boolean,
         company: String,
@@ -44,7 +40,7 @@ class UserRepository(private val service: UserService) {
                     password,
                     if (first_name.isBlank()) null else first_name,
                     if (last_name.isBlank()) null else last_name,
-                    if (role == IS_PARTICIPANT) PARTICIPANT else INSTRUCTOR,
+                    role,
                     if (university.isBlank()) null else university,
                     accepted,
                     if (company.isBlank()) null else company,

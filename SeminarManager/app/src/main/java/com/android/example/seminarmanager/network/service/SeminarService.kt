@@ -8,14 +8,14 @@ interface SeminarService {
     suspend fun getSeminar(): List<SimpleSeminarDto>
 
     @POST("api/v1/seminar/")
-    suspend fun postUser(@Body postSeminarDto: PostSeminarDto): DetailSeminarDto
+    suspend fun postSeminar(@Body postSeminarDto: PostSeminarDto): DetailSeminarDto
 
     @GET("api/v1/seminar/{id}")
-    suspend fun getUserMe(@Path("id") id: Int): DetailSeminarDto
+    suspend fun getSeminarId(@Path("id") id: Int): DetailSeminarDto
 
     @FormUrlEncoded
     @POST("api/v1/seminar/{id}/user/")
-    suspend fun putUserMe(
+    suspend fun postSeminarIdUser(
         @Path("id") id: Int,
         @Field("role") role: String
     ): DetailSeminarDto
