@@ -10,6 +10,9 @@ import androidx.lifecycle.Observer
 import com.android.example.seminarmanager.R
 import com.android.example.seminarmanager.databinding.ActivityLoginBinding
 import com.android.example.seminarmanager.di.NetworkConst
+import com.android.example.seminarmanager.ui.SingleEvent.MAIN_ACTIVITY
+import com.android.example.seminarmanager.ui.SingleEvent.navigateToActivity
+import com.android.example.seminarmanager.ui.SingleEvent.triggerToast
 import com.android.example.seminarmanager.ui.main.MainActivity
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -18,7 +21,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class LoginActivity : AppCompatActivity() {
     //di
     private val loginViewModel: LoginViewModel by viewModel()
-    private val prefs : SharedPreferences by inject()
     //databinding
     private lateinit var binding: ActivityLoginBinding
 
@@ -31,10 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(prefs.getString(NetworkConst.TOKEN_KEY, null) != null) {
-            Toast.makeText(this, "자동로그인 됨", Toast.LENGTH_SHORT).show()
-            gotoMainActivity()
-        }
+        loginViewModel.checkToken()
         binding = DataBindingUtil.setContentView(
             this,
             R.layout.activity_login
@@ -46,10 +45,14 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.login()
             }
         }
-        loginViewModel.toast.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            if(it == "로그인 성공")
-                gotoMainActivity()
+        triggerToast.observe(this, Observer {
+            Toast.makeText(this, it.peekContent(), Toast.LENGTH_SHORT).show()
+        })
+        navigateToActivity.observe(this, Observer {
+            when(it.peekContent()){
+                MAIN_ACTIVITY -> gotoMainActivity()
+                else -> {}
+            }
         })
     }
 }
