@@ -5,15 +5,15 @@ data class UserDto(
     val first_name: String,
     val last_name: String,
     val token: String,
-    val participant: Participant?,
-    val instructor: Instructor?
+    val participant: ParticipantProfile?,
+    val instructor: InstructorProfile?
 )
 
-data class Participant(
+data class ParticipantProfile(
     val id: Int
 )
 
-data class Instructor(
+data class InstructorProfile(
     val id: Int
 )
 

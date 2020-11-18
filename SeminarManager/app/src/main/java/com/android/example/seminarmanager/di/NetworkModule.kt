@@ -6,6 +6,7 @@ import com.android.example.seminarmanager.BuildConfig
 import com.android.example.seminarmanager.di.NetworkConst.BASE_URL
 import com.android.example.seminarmanager.di.NetworkConst.PREFS_FILENAME
 import com.android.example.seminarmanager.di.NetworkConst.TOKEN_KEY
+import com.android.example.seminarmanager.network.service.SeminarService
 import com.android.example.seminarmanager.network.service.UserService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -33,6 +34,7 @@ val networkModule = module {
         )
     }
     single { provideUserService(get()) }
+    single { provideSeminarService(get()) }
 }
 
 private fun provideSharedPreference(androidApplication: Application): SharedPreferences {
@@ -87,3 +89,6 @@ private fun provideRetrofit(
 
 private fun provideUserService(retrofit: Retrofit): UserService =
     retrofit.create(UserService::class.java)
+
+private fun provideSeminarService(retrofit: Retrofit): SeminarService =
+    retrofit.create(SeminarService::class.java)
