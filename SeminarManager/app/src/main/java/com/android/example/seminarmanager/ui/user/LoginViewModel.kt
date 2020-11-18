@@ -32,13 +32,13 @@ class LoginViewModel(
                 triggerToast.value = Event("로그인 성공")
                 navigateToActivity.value = Event(MAIN_ACTIVITY)
             } catch (e: Exception) {
-                e.message?.let {  triggerToast.value = Event(it) }
+                e.message?.let { triggerToast.value = Event(it) }
             }
         }
     }
 
-    val checkToken : () -> (Unit) = {
-        if(prefs.getString(NetworkConst.TOKEN_KEY, null) != null) {
+    val checkToken: () -> (Unit) = {
+        if (prefs.getString(NetworkConst.TOKEN_KEY, null) != null) {
             triggerToast.value = Event("자동 로그인 됨")
             navigateToActivity.value = Event(MAIN_ACTIVITY)
         }

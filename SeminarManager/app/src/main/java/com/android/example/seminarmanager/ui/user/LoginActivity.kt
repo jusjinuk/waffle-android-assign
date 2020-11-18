@@ -21,11 +21,12 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class LoginActivity : AppCompatActivity() {
     //di
     private val loginViewModel: LoginViewModel by viewModel()
+
     //databinding
     private lateinit var binding: ActivityLoginBinding
 
     //gotoActivity
-    private val gotoMainActivity : () -> (Unit) = {
+    private val gotoMainActivity: () -> (Unit) = {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
@@ -45,13 +46,18 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.login()
             }
         }
-        triggerToast.observe(this, Observer {
-            Toast.makeText(this, it.peekContent(), Toast.LENGTH_SHORT).show()
+        triggerToast.observe(this, Observer { e ->
+            e.getContentIfNotHandled()?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
         })
-        navigateToActivity.observe(this, Observer {
-            when(it.peekContent()){
-                MAIN_ACTIVITY -> gotoMainActivity()
-                else -> {}
+        navigateToActivity.observe(this, Observer { e ->
+            e.getContentIfNotHandled()?.let {
+                when (it) {
+                    MAIN_ACTIVITY -> gotoMainActivity()
+                    else -> {
+                    }
+                }
             }
         })
     }
