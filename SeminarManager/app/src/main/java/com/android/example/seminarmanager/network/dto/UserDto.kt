@@ -10,11 +10,18 @@ data class UserDto(
 )
 
 data class ParticipantProfile(
-    val id: Int
+    val id: Int,
+    val seminars: List<SeminarEnrolled>
 )
 
 data class InstructorProfile(
-    val id: Int
+    val id: Int,
+    val charge: List<SeminarEnrolled>
+)
+
+data class SeminarEnrolled(
+    val id: Int,
+    val name: String
 )
 
 //for PUT /user/login/

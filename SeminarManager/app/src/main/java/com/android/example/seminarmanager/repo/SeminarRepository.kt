@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 
 class SeminarRepository(private val service: SeminarService) {
-    suspend fun getSeminar() {
+    suspend fun getSeminar() : List<SimpleSeminarDto> {
         return withContext(Dispatchers.IO) {
             service.getSeminar()
         }

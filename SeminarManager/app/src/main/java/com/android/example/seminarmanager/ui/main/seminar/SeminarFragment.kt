@@ -1,32 +1,46 @@
 package com.android.example.seminarmanager.ui.main.seminar
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.example.seminarmanager.R
+import com.android.example.seminarmanager.databinding.SeminarFragmentBinding
+import com.android.example.seminarmanager.ui.SingleEvent.triggerToast
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SeminarFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SeminarFragment()
-    }
-
-    private lateinit var viewModel: SeminarViewModel
+    private val seminarViewModel: SeminarViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.seminar_fragment, container, false)
-    }
+        val binding = DataBindingUtil.inflate<SeminarFragmentBinding>(inflater,
+            R.layout.seminar_fragment, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SeminarViewModel::class.java)
-        // TODO: Use the ViewModel
+        binding.run {
+            viewModel = seminarViewModel
+            lifecycleOwner = viewLifecycleOwner
+            seminarList.layoutManager = LinearLayoutManager(activity)
+            seminarList.adapter = SeminarListAdapter(seminarViewModel.user.value)
+        }
+
+        triggerToast.observe(this, Observer { e ->
+            e.getContentIfNotHandled()?.let {
+                Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        seminarViewModel.getSeminarList()
+
+        return binding.root
     }
 
 }
