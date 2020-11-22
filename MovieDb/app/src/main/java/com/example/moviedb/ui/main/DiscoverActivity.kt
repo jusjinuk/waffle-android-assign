@@ -39,8 +39,8 @@ class DiscoverActivity : AppCompatActivity() {
         discoverViewModel.errorMessge.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
-
-        discoverViewModel.incrPage()
+        if(discoverViewModel.listMovies.value == null)
+            discoverViewModel.incrPage()
 
     }
 }
