@@ -9,6 +9,9 @@ data class SimpleSeminarDto(
 data class DetailSeminarDto(
     val id: Int,
     val name: String,
+    val capacity: Int,
+    val count: Int,
+    val time: String,
     val instructors: List<SeminarInstructor>,
     val participants: List<SeminarParticipant>
 )
