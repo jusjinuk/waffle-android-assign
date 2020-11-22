@@ -16,7 +16,7 @@ data class ParticipantProfile(
 
 data class InstructorProfile(
     val id: Int,
-    val charge: List<SeminarEnrolled>
+    val charge: SeminarEnrolled
 )
 
 data class SeminarEnrolled(

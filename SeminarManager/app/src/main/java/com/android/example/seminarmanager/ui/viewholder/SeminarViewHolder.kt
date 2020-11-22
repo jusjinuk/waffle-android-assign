@@ -9,14 +9,17 @@ import com.android.example.seminarmanager.network.dto.SimpleSeminarDto
 class SeminarViewHolder(private val binding: ItemSeminarBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindItems(seminar: SimpleSeminarDto) {
+
         binding.run {
+            var tmp = ""
             seminarName.text = seminar.name
             seminar.instructors.forEach {
-                if (instructorName.text.isEmpty())
-                    instructorName.text = it.username
+                tmp = if (tmp.isEmpty())
+                    it.username
                 else
-                    instructorName.append(", " + it.username)
+                    tmp + ", " + it.username
             }
+            instructorName.text = tmp
         }
     }
 }
@@ -25,13 +28,15 @@ class SeminarParticipatingViewHolder(private val binding: ItemSeminarParticipati
     RecyclerView.ViewHolder(binding.root) {
     fun bindItems(seminar: SimpleSeminarDto) {
         binding.run {
+            var tmp = ""
             seminarName.text = seminar.name
             seminar.instructors.forEach {
-                if (instructorName.text.isEmpty())
-                    instructorName.text = it.username
+                tmp = if (tmp.isEmpty())
+                    it.username
                 else
-                    instructorName.append(", " + it.username)
+                    tmp + ", " + it.username
             }
+            instructorName.text = tmp
         }
     }
 }
@@ -40,13 +45,15 @@ class SeminarInstructingViewHolder(private val binding: ItemSeminarInstructingBi
     RecyclerView.ViewHolder(binding.root) {
     fun bindItems(seminar: SimpleSeminarDto) {
         binding.run {
+            var tmp = ""
             seminarName.text = seminar.name
             seminar.instructors.forEach {
-                if (instructorName.text.isEmpty())
-                    instructorName.text = it.username
+                tmp = if (tmp.isEmpty())
+                    it.username
                 else
-                    instructorName.append(", " + it.username)
+                    tmp + ", " + it.username
             }
+            instructorName.text = tmp
         }
     }
 }

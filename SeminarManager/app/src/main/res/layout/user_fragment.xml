@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <LinearLayout
@@ -39,7 +39,7 @@
                 android:layout_weight="3"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="@={viewModel.userName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,7 +65,7 @@
                 android:layout_weight="3"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="@={viewModel.firstName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -91,8 +91,14 @@
                 android:layout_weight="3"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="@={viewModel.lastName}" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정하기" />
 
         <TextView
             android:id="@+id/particpating"
@@ -112,6 +118,7 @@
             android:orientation="horizontal"
             android:scrollbars="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:participating_seminars_enrolled="@{viewModel.user.participant.seminars}"
             tools:listitem="@layout/item_seminar_enrolled" />
 
         <TextView
@@ -127,12 +134,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/instructing_seminar_list"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:scrollbars="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:instructing_seminar_enrolled="@{viewModel.user.instructor.charge}"
             tools:listitem="@layout/item_seminar_enrolled" />
+
     </LinearLayout>
 
 </layout>

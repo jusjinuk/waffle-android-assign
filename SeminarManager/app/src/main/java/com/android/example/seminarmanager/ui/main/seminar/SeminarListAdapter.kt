@@ -21,7 +21,7 @@ class SeminarListAdapter(user: UserDto?) :
     ListAdapter<SimpleSeminarDto, RecyclerView.ViewHolder>(SeminarDiffCallback()) {
 
     val seminar_participating = user?.participant?.seminars?.map { it.id }
-    val seminar_instructing = user?.instructor?.charge?.map { it.id }
+    val seminar_instructing = listOf(user?.instructor?.charge?.id)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
