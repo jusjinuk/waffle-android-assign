@@ -5,10 +5,16 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.example.seminarmanager.R
 import com.android.example.seminarmanager.databinding.ActivityDetailSeminarBinding
+import com.android.example.seminarmanager.repo.Role.INSTRUCTOR
+import com.android.example.seminarmanager.repo.Role.PARTICIPANT
+import com.android.example.seminarmanager.ui.SingleEvent
+import com.android.example.seminarmanager.ui.main.seminar.SeminarViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailSeminarActivity : AppCompatActivity() {
@@ -36,7 +42,19 @@ class DetailSeminarActivity : AppCompatActivity() {
             instructorList.layoutManager = LinearLayoutManager(this@DetailSeminarActivity)
             participantList.adapter = PersonListAdapter()
             participantList.layoutManager = LinearLayoutManager(this@DetailSeminarActivity)
+            participantButton.setOnClickListener {
+                detailSeminarViewModel.enrollSeminar(seminarId, PARTICIPANT)
+            }
+            instructorButton.setOnClickListener {
+                detailSeminarViewModel.enrollSeminar(seminarId, INSTRUCTOR)
+            }
         }
+
+        SingleEvent.triggerToast.observe(this, Observer { e ->
+            e.getContentIfNotHandled()?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
 
         detailSeminarViewModel.run {
             detailSeminar.value ?: getSeminarId(seminarId)

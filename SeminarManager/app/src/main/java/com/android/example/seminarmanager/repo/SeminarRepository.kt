@@ -39,7 +39,7 @@ class SeminarRepository(private val service: SeminarService) {
         }
     }
 
-    suspend fun enrollSeminar(seminar_id: Int, role: String) {
+    suspend fun enrollSeminar(seminar_id: Int, role: String) : DetailSeminarDto {
         return withContext(Dispatchers.IO) {
             service.postSeminarIdUser(seminar_id, role)
         }

@@ -43,6 +43,11 @@ class SeminarParticipatingViewHolder(private val binding: ItemSeminarParticipati
                     tmp + ", " + it.username
             }
             instructorName.text = tmp
+            clickListener = SeminarClickListener(seminar.id) {
+                binding.root.context.startActivity(
+                    DetailSeminarActivity.intentWithSeminarId(binding.root.context, it)
+                )
+            }
         }
     }
 }
@@ -60,6 +65,11 @@ class SeminarInstructingViewHolder(private val binding: ItemSeminarInstructingBi
                     tmp + ", " + it.username
             }
             instructorName.text = tmp
+            clickListener = SeminarClickListener(seminar.id) {
+                binding.root.context.startActivity(
+                    DetailSeminarActivity.intentWithSeminarId(binding.root.context, it)
+                )
+            }
         }
     }
 }
