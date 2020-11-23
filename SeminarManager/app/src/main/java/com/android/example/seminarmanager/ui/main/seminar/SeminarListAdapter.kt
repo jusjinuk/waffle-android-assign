@@ -68,7 +68,7 @@ class SeminarListAdapter(user: UserDto?) :
     override fun getItemViewType(position: Int): Int = when {
         seminar_participating?.contains(getItem(position).id) == true ->
             SEMINAR_PARTICIPATING_VIEW_TYPE
-        seminar_instructing?.contains(getItem(position).id) == true ->
+        seminar_instructing.contains(getItem(position).id) ->
             SEMINAR_INSTRUCTING_VIEW_TYPE
         else ->
             SEMINAR_DEFAULT_VIEW_TYPE

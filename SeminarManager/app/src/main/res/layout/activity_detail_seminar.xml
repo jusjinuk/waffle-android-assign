@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.android.example.seminarmanager.ui.seminar.DetailSeminarViewModel" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +39,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="Name" />
+                android:text="@{viewModel.detailSeminar.name}" />
         </LinearLayout>
 
         <LinearLayout
@@ -61,7 +66,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="@{String.valueOf(viewModel.detailSeminar.capacity)}" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +93,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="@{String.valueOf(viewModel.detailSeminar.count)}" />
         </LinearLayout>
 
         <LinearLayout
@@ -115,7 +120,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="@{viewModel.detailSeminar.time}" />
         </LinearLayout>
 
         <LinearLayout
@@ -148,9 +153,11 @@
                     android:text="Join" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/instructor_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/item_person"/>
+                    app:people_seminar="@{viewModel.detailSeminar.instructors}"
+                    tools:listitem="@layout/item_person" />
             </LinearLayout>
 
             <LinearLayout
@@ -177,9 +184,11 @@
                     android:text="Join" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/participant_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/item_person"/>
+                    app:people_seminar="@{viewModel.detailSeminar.participants}"
+                    tools:listitem="@layout/item_person" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

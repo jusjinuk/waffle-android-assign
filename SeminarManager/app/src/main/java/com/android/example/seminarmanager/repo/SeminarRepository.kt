@@ -33,7 +33,7 @@ class SeminarRepository(private val service: SeminarService) {
         }
     }
 
-    suspend fun getSeminarId(id: Int) {
+    suspend fun getSeminarId(id: Int) : DetailSeminarDto {
         return withContext(Dispatchers.IO) {
             service.getSeminarId(id)
         }

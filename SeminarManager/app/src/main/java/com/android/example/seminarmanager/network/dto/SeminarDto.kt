@@ -16,15 +16,17 @@ data class DetailSeminarDto(
     val participants: List<SeminarParticipant>
 )
 
+sealed class SeminarPerson
+
 data class SeminarInstructor(
     val id: Int,
     val username: String
-)
+) : SeminarPerson()
 
 data class SeminarParticipant(
     val id: Int,
     val username: String
-)
+) : SeminarPerson()
 
 data class PostSeminarDto(
     val name: String,
