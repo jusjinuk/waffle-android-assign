@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 object SingleEvent {
     val navigateToActivity = MutableLiveData<Event<String>>()
     val triggerToast = MutableLiveData<Event<String>>()
+    val triggerMenuRefresh = MutableLiveData<Event<Boolean>>()
 
     const val MAIN_ACTIVITY = "MainActivity"
 }

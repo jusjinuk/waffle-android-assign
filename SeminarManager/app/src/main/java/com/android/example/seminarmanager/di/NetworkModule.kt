@@ -21,6 +21,7 @@ object NetworkConst {
     const val BASE_URL = "http://ec2-3-34-178-249.ap-northeast-2.compute.amazonaws.com/"
     const val PREFS_FILENAME = "prefs"
     const val TOKEN_KEY = "token"
+    const val IS_INSTRUCTOR = "is_instructor"
 }
 
 val networkModule = module {
