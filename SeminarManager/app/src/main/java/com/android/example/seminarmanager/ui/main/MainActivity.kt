@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.android.example.seminarmanager.R
 import com.android.example.seminarmanager.databinding.ActivityMainBinding
 import com.android.example.seminarmanager.di.NetworkConst.IS_INSTRUCTOR
+import com.android.example.seminarmanager.di.NetworkConst.IS_IN_CHARGE
 import com.android.example.seminarmanager.ui.SingleEvent.triggerMenuRefresh
 import com.android.example.seminarmanager.ui.main.FragmentConst.SEMINAR
 import com.android.example.seminarmanager.ui.main.FragmentConst.USER
@@ -68,7 +69,16 @@ class MainActivity : AppCompatActivity() {
         val id: Int = item.itemId
         return if (id == R.id.add_button) {
             //process your onClick here
-            startActivity(Intent(this, CreateSeminarActivity::class.java))
+            prefs.getString(IS_IN_CHARGE, null)?.let {
+                startActivity(Intent(this, CreateSeminarActivity::class.java))
+                finish()
+            } ?: run {
+                Toast.makeText(
+                    this,
+                    "하나의 세미나만 강의할 수 있습니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             true
         } else super.onOptionsItemSelected(item)
     }

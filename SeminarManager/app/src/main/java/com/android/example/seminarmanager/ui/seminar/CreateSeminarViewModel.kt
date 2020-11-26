@@ -16,16 +16,30 @@ import com.android.example.seminarmanager.ui.SingleEvent.triggerToast
 import kotlinx.coroutines.launch
 
 class CreateSeminarViewModel(
-    private val repository: SeminarRepository,
-    private val prefs: SharedPreferences,
-    private val editor: SharedPreferences.Editor
+    private val repository: SeminarRepository
 ) : ViewModel() {
 
-    fun login() {
+    val name = MutableLiveData<String>()
+    val capacity = MutableLiveData<String>()
+    val count = MutableLiveData<String>()
+    val time = MutableLiveData<String>("Choose Time")
+
+    fun createSeminar() {
         viewModelScope.launch {
             try {
+                name.value ?: run { error("Name is empty") }
+                capacity.value ?: run { error("Capacity is empty") }
+                count.value ?: run { error("Count is empty") }
+                if (time.value == "Choose Time") error("Time is empty")
 
-                triggerToast.value = Event("로그인 성공")
+                repository.postSeminar(
+                    name.value!!,
+                    capacity.value!!.toInt(),
+                    count.value!!.toInt(),
+                    time.value!!,
+                    true
+                )
+                triggerToast.value = Event("세미나 생성 성공")
                 navigateToActivity.value = Event(MAIN_ACTIVITY)
             } catch (e: Exception) {
                 e.message?.let { triggerToast.value = Event(it) }

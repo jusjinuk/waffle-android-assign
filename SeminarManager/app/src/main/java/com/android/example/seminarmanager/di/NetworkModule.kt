@@ -22,6 +22,7 @@ object NetworkConst {
     const val PREFS_FILENAME = "prefs"
     const val TOKEN_KEY = "token"
     const val IS_INSTRUCTOR = "is_instructor"
+    const val IS_IN_CHARGE = "is_in_charge"
 }
 
 val networkModule = module {
