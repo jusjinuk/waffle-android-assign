@@ -32,7 +32,7 @@ class SeminarViewModel(
                 listSeminars.value = seminarRepository.getSeminar()
                 user.value!!.instructor?.apply {
                     editor.putString(NetworkConst.IS_INSTRUCTOR, "1")
-                    charge ?: let { editor.putString(NetworkConst.IS_IN_CHARGE, "1") }
+                    charge?.let { editor.putString(NetworkConst.IS_IN_CHARGE, "1") }
                     editor.commit()
                     triggerMenuRefresh.value = Event(true)
                 }

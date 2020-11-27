@@ -69,15 +69,15 @@ class MainActivity : AppCompatActivity() {
         val id: Int = item.itemId
         return if (id == R.id.add_button) {
             //process your onClick here
-            prefs.getString(IS_IN_CHARGE, null)?.let {
-                startActivity(Intent(this, CreateSeminarActivity::class.java))
-                finish()
-            } ?: run {
+            prefs.getString(IS_IN_CHARGE, null)?.run {
                 Toast.makeText(
-                    this,
+                    this@MainActivity,
                     "하나의 세미나만 강의할 수 있습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
+            } ?: let {
+                startActivity(Intent(this, CreateSeminarActivity::class.java))
+                finish()
             }
             true
         } else super.onOptionsItemSelected(item)

@@ -45,6 +45,11 @@ class LoginActivity : AppCompatActivity() {
             loginButton.setOnClickListener {
                 loginViewModel.login()
             }
+            signupButton.setOnClickListener {
+                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
         triggerToast.observe(this, Observer { e ->
             e.getContentIfNotHandled()?.let {

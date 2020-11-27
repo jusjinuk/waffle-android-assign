@@ -37,10 +37,13 @@ class SeminarFragment : Fragment() {
                 Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
             }
         })
-        if(seminarViewModel.listSeminars.value == null)
-            seminarViewModel.getSeminarList()
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        seminarViewModel.getSeminarList()
     }
 
 }
