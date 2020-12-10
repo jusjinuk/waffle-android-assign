@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SeminarManager</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="seminar">Seminar</string>
+    <string name="user">User</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="user_name">User Name</string>
+    <string name="participating_seminars">Participating Seminars</string>
+    <string name="instructing_seminars">Instructing Seminars</string>
+</resources>
