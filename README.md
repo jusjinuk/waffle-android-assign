@@ -1,22 +1,22 @@
 # waffle-android-assign
 
-### 1주차 과제 TicTacToe 관련 주석
+### 1주차 TicTacToe 관련 주석
 ---
 #### 개요
    * PLAYING... 대신 누구의 턴인지 뜨도록 UI를 설정해놓았습니다.
    * Player O부터 시작하도록 만들었습니다.
 
-### 2주차 과제 SimpleTodo 관련 주석
+### 2주차 SimpleTodo 관련 주석
 ---
 #### 개요
   * 수고해주셔서 감사드립니다.
 
-### 3주차 과제 Moviedb 관련 주석
+### 3주차 Moviedb 관련 주석
 ---
 #### 개요
   * Infinite scroll을 구현하였습니다.
   
-### 4주차 과제 SeminarManager 관련 주석
+### 4주차 SeminarManager 관련 주석
 ---
   * 수정 필요한 Issue들
     - BindingUtil에서 seminar list를 대입할 때 adapter 객체를 새로 만들어서 대입하여 리스트가 새로고침될 때마다 스크롤이 위로 올라가는 문제가 있습니다.
