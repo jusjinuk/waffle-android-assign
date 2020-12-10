@@ -18,7 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkConst {
-    const val BASE_URL = "http://ec2-3-34-178-249.ap-northeast-2.compute.amazonaws.com/"
+    const val BASE_URL = "https://waffle-backend-jinuk.shop"
     const val PREFS_FILENAME = "prefs"
     const val TOKEN_KEY = "token"
     const val IS_INSTRUCTOR = "is_instructor"
